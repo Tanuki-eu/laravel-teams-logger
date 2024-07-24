@@ -1,0 +1,22 @@
+{
+    "name": "appsys/laravel-teams-logger",
+    "autoload": {
+        "psr-4": {
+            "AppSys\\LaravelTeamsLogger\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Antonio Di Passio",
+            "email": "antonio.dipassio@appsysictgroup.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "monolog/monolog": "^3.0"
+    },
+    "require-dev": {
+        "ext-curl": "*",
+        "phpunit/phpunit": "11"
+    }
+}
