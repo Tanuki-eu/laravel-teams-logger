@@ -2,6 +2,8 @@
 
 namespace AppSys\LaravelTeamsLogger;
 
+use Monolog\Formatter\FormatterInterface;
+use Monolog\Formatter\NormalizerFormatter;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Level;
 use Monolog\LogRecord;
@@ -52,7 +54,7 @@ class Handler extends AbstractProcessingHandler
                             ],
                             [
                                 'type' => 'Container',
-                                'items' => $this->arrayToColumns($record->context)
+                                'items' => $this->arrayToColumns($record->formatted['context'])
                             ]
                         ]
                     ]
@@ -78,6 +80,9 @@ class Handler extends AbstractProcessingHandler
     {
         $output = [];
         foreach ($array as $key => $value) {
+            if ($key === 'trace') {
+                continue;
+            }
             $output[] = [
                 'type' => 'ColumnSet',
                 'columns' => [
@@ -110,5 +115,10 @@ class Handler extends AbstractProcessingHandler
         }
 
         return $output;
+    }
+
+    protected function getDefaultFormatter(): FormatterInterface
+    {
+        return new NormalizerFormatter();
     }
 }
