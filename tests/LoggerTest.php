@@ -6,7 +6,7 @@ final class LoggerTest extends TestCase
     public function testCanSendLogMessage(): void
     {
         $config = [
-            'url' => 'https://prod-148.westeurope.logic.azure.com:443/workflows/d9bd39319300447094fb7e7df917cba8/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=CzdSWuOqG7f8KMR-vvBlBMr1SOwybX-ZAZPkmcV2ubA'
+            'url' => 'https://default38753ae5bbbe495c87217eab004613.14.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/d9bd39319300447094fb7e7df917cba8/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=g6AT6JTEW-1OzXxh3V6_td-mvCznUYzhn-Qnt4r9VJE'
         ];
 
         $channel = new \AppSys\LaravelTeamsLogger\Channel;
