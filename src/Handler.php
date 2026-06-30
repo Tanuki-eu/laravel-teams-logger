@@ -10,17 +10,24 @@ use Monolog\LogRecord;
 
 class Handler extends AbstractProcessingHandler
 {
-    private $url;
+    private static array $throttleCache = [];
 
-    public function __construct($url, $level = \Monolog\Level::Debug)
+    public function __construct(
+        private string   $url,
+        int|Level|string $level = Level::Debug,
+        private bool     $throttleExceptions = false,
+        private int      $throttleTtl = 60,
+    )
     {
         parent::__construct($level);
-
-        $this->url = $url;
     }
 
     protected function write(LogRecord $record): void
     {
+        if ($this->shouldThrottle($record)) {
+            return;
+        }
+
         $json = json_encode([
             'type' => 'message',
             'attachments' => [
@@ -120,5 +127,32 @@ class Handler extends AbstractProcessingHandler
     protected function getDefaultFormatter(): FormatterInterface
     {
         return new NormalizerFormatter();
+    }
+
+    private function shouldThrottle(LogRecord $record)
+    {
+        if (!$this->throttleExceptions) {
+            return false;
+        }
+
+        $exception = $record->context['exception'] ?? null;
+
+        if (!$exception instanceof \Throwable) {
+            return false;
+        }
+
+        $key = md5($exception::class . '|' . $exception->getMessage());
+        $now = time();
+
+        if (
+            isset(self::$throttleCache[$key]) &&
+            self::$throttleCache[$key] > $now
+        ) {
+            return true;
+        }
+
+        self::$throttleCache[$key] = $now + $this->throttleTtl;
+
+        return false;
     }
 }
