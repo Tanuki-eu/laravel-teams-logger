@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use AppSys\LaravelTeamsLogger\Channel;
+use Tanuki\LaravelTeamsLogger\Channel;
 use PHPUnit\Framework\TestCase;
 
 final class LoggerTest extends TestCase

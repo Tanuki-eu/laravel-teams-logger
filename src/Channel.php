@@ -1,6 +1,6 @@
 <?php
 
-namespace AppSys\LaravelTeamsLogger;
+namespace Tanuki\LaravelTeamsLogger;
 
 use Monolog\Level;
 use Monolog\Logger;

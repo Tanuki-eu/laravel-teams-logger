@@ -1,14 +1,14 @@
 {
-    "name": "appsys/laravel-teams-logger",
+    "name": "tanuki-eu/laravel-teams-logger",
     "autoload": {
         "psr-4": {
-            "AppSys\\LaravelTeamsLogger\\": "src/"
+            "Tanuki\\LaravelTeamsLogger\\": "src/"
         }
     },
     "authors": [
         {
             "name": "Antonio Di Passio",
-            "email": "antonio.dipassio@appsysictgroup.com"
+            "email": "antonio.dipassio@tanuki.eu"
         }
     ],
     "require": {
